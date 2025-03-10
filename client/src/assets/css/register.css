@@ -1,0 +1,92 @@
+.register-container {
+    background-color: #ffffff;
+    min-height: 500px;
+    min-width: 500px;
+
+    border-radius: 5px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 30px;
+    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.2);
+}
+
+.register-header {
+    display: flex;
+    justify-content: center;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.register-input-sections{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 18px;
+    color: #666666;
+}
+
+.register-input, .display-password {
+    height: 50px;
+    border-radius: 5px;
+    border: solid 1px #dddddd;
+    padding: 7px;
+    font-size: 15px;
+}
+
+.register-input:focus, .display-password:focus {
+    outline: none;
+    border: solid 2px #6c5ce7;
+}
+
+.register-submit-button {
+    width: 100%;
+    height: 50px;
+    background-color: #6c5ce7;
+    border: solid 1px #6c5ce7;
+    border-radius: 5px;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.register-submit-button:hover {
+    background-color: #5a4dc1;
+}
+
+.login-section {
+    display: flex;
+    justify-content: center;
+}
+
+.register-signup-link {
+    color: #6c5ce7;
+    margin-left: 5px;
+}
+
+.register-signup-link:hover {
+    color: #5a4dc1;
+}
+
+.register-error-message {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    color: rgb(232, 141, 141);
+}
+
+.register-error-message-list{
+    padding-left: 15px;
+}
+
+.register-view-password-section {
+    display: flex;
+    gap: 5px;
+    color: #666666;
+}

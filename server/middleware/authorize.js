@@ -3,18 +3,13 @@ require('dotenv').config()
 
 const authorize = async (req, res, next) => {
     try {
+        const accessToken = req.header("Authorization").split(" ")[1]
 
-        const { token } = req.header("accessToken")
-
-        if (!token) {
-            return res.status(403).send("You are not authorized")
+        if (!accessToken) {
+            return res.status(401).send("You are not authorized")
         }
 
-        const payload = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
-
-        if (!isEqual) {
-            return res.status(401).send("Token is not authentic")
-        }
+        const payload = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET)
 
         req.user = payload.userID
 
@@ -22,7 +17,7 @@ const authorize = async (req, res, next) => {
         
     } catch (error) {
         console.error("In ./authorize.js: ", error.message)
-        return res.status(403).send("You are not authorized")
+        return res.status(401).send("Token has expired")
     }
 }
 

@@ -1,0 +1,32 @@
+.listItem-checkBtn {
+    width: 25px;
+    height: 25px;
+    border: solid 2px #6c5ce7;
+    border-radius: 100px;
+    background-color: white;
+
+    margin-right: 10px;
+}
+
+.listItem {
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.listItem > td{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: none;
+}
+
+.listItem > td:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+
+    display: flex;
+}
+
+.listItem > td:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}

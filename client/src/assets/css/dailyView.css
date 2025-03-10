@@ -1,0 +1,120 @@
+.dailyView-task-area {
+    background-color: #F5F5F9;
+    grid-row: 2 / 8;
+    grid-column: 2 / 8;
+    padding: 25px;
+}
+
+.dailyView-header {
+    display: flex;
+}
+
+.dailyView-header > h1 {
+    font-size: 30px;
+}
+
+.dailyView-header > p {
+    color: #757575;
+    margin-top: 13px;
+    margin-left: 10px;
+}
+
+.dailyView-taskNav-container {
+    margin-top: 20px;
+    /* background-color: rgb(95, 120, 95); */
+    width: 40%;
+
+    display: flex;
+    gap: 20px;
+}
+
+.dailyView-addTaskBtn {
+    color: white;
+    background-color: #6B5CE7;
+
+    width: 120px;
+    padding: 10px;
+
+    border-radius: 5px;
+    border: none;
+
+    cursor: pointer;
+}
+
+.dailyView-viewAllBtn {
+    color: #6B5CE7;
+    background-color: #E7E5F7;
+
+    width: 90px;
+    padding: 10px;
+
+    border-radius: 5px;
+    border: none;
+
+    cursor: pointer;
+}
+
+.dailyView-viewCompletedBtn {
+    color: #757575;
+
+    width: 120px;
+    padding: 10px;
+
+    border-radius: 5px;
+    border: none;
+    
+    background-color: transparent;
+
+    cursor: pointer;
+}
+
+.dailyView-tableContainer {
+    margin-top: 35px;
+}
+
+.dailyView-tableStyle > thead > tr > th {
+    background-color: #F5F5F9;
+
+    font-size: 12px;
+    color: #9E9E9E;
+    font-weight: 500;
+
+    border: none;
+}
+
+.dailyView-taskCol {
+    width: 60%;
+}
+
+.dailyView-checkBtn {
+    width: 25px;
+    height: 25px;
+    border: solid 2px #6c5ce7;
+    border-radius: 100px;
+    background-color: white;
+
+    margin-right: 10px;
+}
+
+.dailyView-listItem > td{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: none;
+}
+
+.dailyView-listItem > td:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+
+    display: flex;
+}
+
+.dailyView-listItem > td:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.dailyView-listItem {
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
