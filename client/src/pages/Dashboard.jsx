@@ -1,7 +1,8 @@
 import axios from 'axios'
 import TokenContext from '../contexts/TokenProvider'
 import '../assets/css/dashboard.css'
-import DailyView from '../assets/components/DailyView'
+import DailyView from '../components/DailyView'
+import WeeklyView from '../components/WeeklyView'
 import { useContext, useEffect, useState } from 'react'
 
 export default function Dashboard() {
@@ -9,12 +10,7 @@ export default function Dashboard() {
     const [name, setName] = useState("")
     const [tasks, setTasks] = useState()
     const { token } = useContext(TokenContext)
-    const [selectedView, setSelectedView] = useState(
-        {
-            "DailyView": true,
-            "WeeklyView": false
-        }
-    )
+    const [selectedView, setSelectedView] = useState('DailyView')
 
     useEffect(() => {
         async function fetchData() {
@@ -24,35 +20,33 @@ export default function Dashboard() {
                         Authorization: `Bearer ${token}`
                     }
                 })
-
-                if (response.status === 401) {
-                    window.location = '/'
-                }
                 setName(response.data.name)
                 setTasks(response.data.tasks)
                 console.log(response)
             } catch (error) {
-                if (response)
-                console.log("Error fetching name: ", error)
+                if (error.response) {
+                    console.log("Error fetching data: ", error.response.data)
+                    if (error.response.status === 401) {
+                        window.location = '/'
+                    }
+                } 
             }
         }
 
         if (token) {
             fetchData()
         }
-    }, [token])
+    }, [token, tasks])
 
-    console.log(tasks)
     return (
         <div className='dashboard-container'>
              <section className='dashboard-sidebar'>
                 <p className='dashboard-greeting'>Hi, {name}!</p>
 
-
                 <nav>
                     <ul className='dashboard-views'>
-                        <a className='dashboard-sidebar-buttons' href="">Daily View</a>
-                        <a className='dashboard-sidebar-buttons' href="">Weekly View</a>
+                        <button id="DailyView" className={selectedView === 'DailyView' ? 'dashboard-sidebar-selected' :'dashboard-sidebar-buttons'} onClick={e => setSelectedView(e.target.id)} href="">Daily View</button>
+                        <button id='WeeklyView' className={selectedView === 'WeeklyView' ? 'dashboard-sidebar-selected':'dashboard-sidebar-buttons'} onClick={e => setSelectedView( e.target.id)} href="">Weekly View</button>
                     </ul>
                 </nav>
 
@@ -71,7 +65,8 @@ export default function Dashboard() {
                 <button>profile</button>
             </section>
 
-            {selectedView.DailyView && <DailyView tasks={tasks}/>}
+            {selectedView === 'DailyView' && <DailyView tasks={tasks}/>}
+            {selectedView === 'WeeklyView' && <WeeklyView />}
 
         </div>
     )

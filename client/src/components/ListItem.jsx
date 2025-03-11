@@ -1,7 +1,10 @@
-import '../css/listItem.css'
+import '../assets/css/listItem.css'
 
 export default function ListItem(props) {
-    console.log(props.tasks)
+    if (!Array.isArray(props.tasks)) {
+        console.error("Expected an array of tasks, but got:", props.tasks);
+        return null; 
+    }
     return (
         <>
             {props.tasks.map(task => {
