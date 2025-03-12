@@ -2,12 +2,24 @@ import '../assets/css/dailyView.css'
 import ListItem from './ListItem'
 import AddTaskModal from './addTaskModal'
 import { today } from '../utils/dateHandler'
+import { useState } from 'react'
 
 export default function DailyView(props) {
 
+    const [tasks, setTasks] = useState(props.tasks)
+
+    function propsIsArray() {
+        if (!Array.isArray(props.tasks)) {
+            console.error("Expected an array of tasks, but got:", props.tasks);
+            return null; 
+        } else {
+            return true
+        }
+    }
+
     return (
         <>
-            <AddTaskModal />
+            <AddTaskModal setTasks={setTasks}/>
 
             <div className='dailyView-task-area'>
                 <section className='dailyView-header'>
@@ -32,7 +44,9 @@ export default function DailyView(props) {
                             </tr>
                         </thead>
                         <tbody>
-                            <ListItem tasks={props.tasks}/>
+                            {propsIsArray() && props.tasks.map(taskItem => {
+                                return <ListItem key={taskItem.task_id} id={taskItem.task_id} description={taskItem.task_description} category={taskItem.category} due_date={taskItem.due_date} priority={taskItem.task_priority}/>
+                            })}
                         </tbody>
                     </table>
                 </section>

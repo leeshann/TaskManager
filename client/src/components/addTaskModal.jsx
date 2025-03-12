@@ -7,7 +7,7 @@ import { handleCreateTask, handleInputChange } from '../utils/addTaskHandlers'
 
 
 
-export default function AddTaskModal() {
+export default function AddTaskModal(props) {
     const { token } = useContext(TokenContext)
 
     const [formData, setFormData] = useState({
@@ -60,7 +60,7 @@ export default function AddTaskModal() {
                             <section>
                                 <label htmlFor="category" className='dailyView-label'>Category</label>
                                 <select id="category" name="category" class="form-select" aria-label="Select a category" value={formData.category} onChange={e => handleInputChange(e, setFormData)}>
-                                    <option selected>Select a category</option>
+                                    <option value="Select a category" selected>Select a category</option>
                                     <option value="Work">Work</option>
                                     <option value="Home">Home</option>
                                     <option value="Personal">Personal</option>
@@ -81,7 +81,7 @@ export default function AddTaskModal() {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="dailyView-addTaskBtn" onClick={e => handleCreateTask(e, formData, setInvalidData, token, setFormData)}>Create Task</button>
+                        <button type="submit" class="dailyView-addTaskBtn" onClick={e => handleCreateTask(e, formData, setInvalidData, token, setFormData, props.setTasks)}>Create Task</button>
                     </div>
                 </div>
             </div>

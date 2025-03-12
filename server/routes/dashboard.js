@@ -21,6 +21,21 @@ router.get('/', authorize, async (req, res) => {
     }
 })
 
+router.put('/', authorize, async (req, res) => {
+    const { description, due_date, category, priority, task_id } = req.body
+
+    try {
+        const response = await pool.query(
+            "UPDATE task SET task_description = $1, due_date = $2, category = $3, task_priority = $4 WHERE task_id = $5 RETURNING *",
+            [description, due_date, category, priority, task_id]
+        )
+        res.status(200).send(response.rows[0])
+    } catch (error) {
+        console.log("In /dashboard/newTask: ", error.message)
+        res.status(500).send()
+    }
+})
+
 router.post('/newTask', authorize, async(req, res) => {
     const { description, due_date, category, priority } = req.body
 

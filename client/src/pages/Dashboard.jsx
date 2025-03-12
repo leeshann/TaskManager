@@ -22,7 +22,6 @@ export default function Dashboard() {
                 })
                 setName(response.data.name)
                 setTasks(response.data.tasks)
-                console.log(response)
             } catch (error) {
                 if (error.response) {
                     console.log("Error fetching data: ", error.response.data)
