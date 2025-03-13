@@ -11,12 +11,28 @@ router.get('/', authorize, async (req, res) => {
         )
 
         const taskList = await pool.query(
-            "SELECT * FROM task WHERE user_id = $1",
+            "SELECT * FROM task WHERE user_id = $1 ORDER BY task_id ASC",
             [req.user]
         )
         res.status(200).json({name: user.rows[0].user_name, tasks: taskList.rows})
     } catch (error) {
         console.log("In /dashboard: ", error.message)
+        res.status(500).send()
+    }
+})
+
+router.get('/task/:task_id', authorize, async (req, res) => {
+    const { task_id } = req.params
+
+    try {
+        const task = await pool.query(
+            "SELECT * FROM task WHERE task_id = $1",
+            [task_id]
+        )
+
+        res.status(200).send(task.rows[0])
+    } catch (error) {
+        console.log("In /dashboard GET: ", error.message)
         res.status(500).send()
     }
 })

@@ -13,6 +13,52 @@
     border-radius: 10px;
 }
 
+.whatever {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.listItem-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.listItem-editDeleteContainer {
+    width: 80px;
+
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.listItem-editBtn {
+    width: 35px;
+    height: 35px;
+    border-radius: 100px;
+
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid #EAEAEA;
+    background-color: #F8F9FA;
+    color: #6B5CE7;
+}
+
+.listItem-deleteBtn {
+    width: 35px;
+    height: 35px;
+    border-radius: 100px;
+
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid #EAEAEA;
+    background-color: #F8F9FA;
+    color: #FF6B6B;
+}
+
 .listItem > td{
     padding-top: 20px;
     padding-bottom: 20px;

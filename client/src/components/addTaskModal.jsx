@@ -1,14 +1,12 @@
-import axios from 'axios'
 import TokenContext from '../contexts/TokenProvider'
-import { useState, useContext, useEffect } from 'react'
+import { useState, useContext, useEffect, useRef } from 'react'
 import { getMinDate } from '../utils/dateHandler'
-import { handleCreateTask, handleInputChange } from '../utils/addTaskHandlers'
-
-
-
+import { handleCreateTask } from '../utils/handleCreateTask'
+import { handleInputChange } from '../utils/handleInputChange'
 
 export default function AddTaskModal(props) {
     const { token } = useContext(TokenContext)
+    const modalRef = useRef(null)
 
     const [formData, setFormData] = useState({
         description: "",
@@ -21,14 +19,10 @@ export default function AddTaskModal(props) {
     const [invalidData, setInvalidData] = useState(false)
 
     useEffect(() => {
-        const addTaskModal = new bootstrap.Modal(document.getElementById('addTaskModal'), {
-            keyboard: false
-        });
-        
-        window.addTaskModal = addTaskModal;
-    
+        modalRef.current = new bootstrap.Modal(document.getElementById('addTaskModal'));
+
         return () => {
-            addTaskModal.dispose();
+            modalRef.current.dispose();
         };
     }, []);
 
@@ -81,7 +75,7 @@ export default function AddTaskModal(props) {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="dailyView-addTaskBtn" onClick={e => handleCreateTask(e, formData, setInvalidData, token, setFormData, props.setTasks)}>Create Task</button>
+                        <button type="submit" class="dailyView-addTaskBtn" onClick={e => handleCreateTask(e, formData, setInvalidData, token, setFormData, props.setTasks, modalRef)}>Create Task</button>
                     </div>
                 </div>
             </div>
