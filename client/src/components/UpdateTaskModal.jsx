@@ -78,7 +78,13 @@ export default function UpdateTaskModal(props) {
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="dailyView-addTaskBtn" onClick={() => handleUpdateTask(formData, token, modalRef)}>Save changes</button>
+                    <button type="button" class="dailyView-addTaskBtn" 
+                     onClick={() => handleUpdateTask(
+                        formData, 
+                        token, 
+                        modalRef, 
+                        props.setTasks
+                    )}>Save changes</button>
                 </div>
                 </div>
             </div>

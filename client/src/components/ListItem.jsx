@@ -43,7 +43,7 @@ export default function ListItem(props) {
 
     return (
         <>
-            <UpdateTaskModal id={props.id} formData={formData}/>
+            <UpdateTaskModal id={props.id} formData={formData} setTasks={props.setTasks}/>
              <tr id={props.id} className='listItem'>
                     <td>
                         <button className='listItem-checkBtn'></button>

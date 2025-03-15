@@ -50,7 +50,14 @@ export default function AllTasksView(props) {
                         </thead>
                         <tbody>
                             {propsIsArray() && props.tasks.map(taskItem => {
-                                return <ListItem key={taskItem.task_id} id={taskItem.task_id} description={taskItem.task_description} category={taskItem.category} due_date={taskItem.due_date} priority={taskItem.task_priority} setTasks={props.setTasks}/>
+                                return <ListItem 
+                                        key={taskItem.task_id} 
+                                        id={taskItem.task_id} 
+                                        description={taskItem.task_description} 
+                                        category={taskItem.category} 
+                                        due_date={taskItem.due_date} 
+                                        priority={taskItem.task_priority} 
+                                        setTasks={props.setTasks}/>
                             })}
                         </tbody>
                     </table>

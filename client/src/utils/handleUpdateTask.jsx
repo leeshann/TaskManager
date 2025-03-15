@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export async function handleUpdateTask(formData, token, modalRef) {
+export async function handleUpdateTask(formData, token, modalRef, setTasks) {
     const reformattedData = {
         ...formData,
         due_date: `${formData.due_date} ${formData.due_time}`
@@ -11,6 +11,13 @@ export async function handleUpdateTask(formData, token, modalRef) {
                 Authorization: `Bearer ${token}`
             }
         })
+        const getAllTasks = await axios.get('http://localhost:3029/dashboard',
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        setTasks(getAllTasks.data.tasks)
         modalRef.current.hide()
     } catch (error) {
         if (error.response) {
