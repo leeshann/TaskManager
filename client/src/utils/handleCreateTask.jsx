@@ -8,7 +8,7 @@ const initialFormData = {
     priority: ""
 }
 
-export async function handleCreateTask(e, formData, setInvalidData, token, setFormData, setTasks, modalRef) {
+export async function handleCreateTask(e, formData, setInvalidData, token, setFormData, modalRef, setParentTasks) {
     e.preventDefault()
     let isValidInfo = true
 
@@ -41,7 +41,7 @@ export async function handleCreateTask(e, formData, setInvalidData, token, setFo
                 Authorization: `Bearer ${token}`
             }
         })
-        console.log(response)
+        console.log("response is: " , response)
         modalRef.current.hide()
 
         const getAllTasks = await axios.get("http://localhost:3029/dashboard/", {
@@ -51,7 +51,7 @@ export async function handleCreateTask(e, formData, setInvalidData, token, setFo
         })
 
         setFormData(initialFormData)
-        setTasks(getAllTasks)
+        setParentTasks(getAllTasks.data.tasks)
         document.getElementsByName("description").value = ""
 
     } catch (error) {

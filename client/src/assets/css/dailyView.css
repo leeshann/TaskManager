@@ -9,6 +9,7 @@
 
 .dailyView-header {
     display: flex;
+    align-items: center;
 }
 
 .dailyView-tableStyle {
@@ -52,18 +53,6 @@
     background-color: #5341df;
 }
 
-.dailyView-viewAllBtn {
-    color: #6B5CE7;
-    background-color: #E7E5F7;
-
-    width: 90px;
-    padding: 10px;
-
-    border-radius: 5px;
-    border: none;
-
-    cursor: pointer;
-}
 
 .dailyView-viewCompletedBtn {
     color: #757575;

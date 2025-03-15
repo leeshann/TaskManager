@@ -1,12 +1,12 @@
-import '../assets/css/dailyView.css'
+import { today, getMinDate } from '../utils/dateHandler'
 import ListItem from './ListItem'
 import AddTaskModal from './addTaskModal'
-import { today } from '../utils/dateHandler'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+
 
 export default function DailyView(props) {
 
-    const [tasks, setTasks] = useState(props.tasks)
+    const [tasks, setTasks] = useState()
 
     function propsIsArray() {
         if (!Array.isArray(props.tasks)) {
@@ -19,39 +19,38 @@ export default function DailyView(props) {
 
     return (
         <>
-            <AddTaskModal setTasks={setTasks}/>
+        <AddTaskModal setTasks={setTasks}/>
 
-            <div className='dailyView-task-area'>
-                <section className='dailyView-header'>
-                    <h1>Today's Tasks</h1>
-                    <p>{today}</p>
-                </section>
+        <div className='dailyView-task-area'>
+            <section className='dailyView-header'>
+                <h1>Today's tasks</h1>
+                <p>{today}</p>
+            </section>
 
-                <section className='dailyView-taskNav-container'>
-                    <button className='dailyView-addTaskBtn' data-bs-toggle="modal" data-bs-target="#addTaskModal">Add Task +</button>
-                    <button className='dailyView-viewAllBtn'>All</button>
-                    <button className='dailyView-viewCompletedBtn'>Completed</button>
-                </section>
+            <section className='dailyView-taskNav-container'>
+                <button className='dailyView-addTaskBtn' data-bs-toggle="modal" data-bs-target="#addTaskModal">Add Task +</button>
+                <button className='dailyView-viewCompletedBtn'>Completed</button>
+            </section>
 
-                <section className='dailyView-tableContainer'>
-                    <table class="table dailyView-tableStyle">
-                        <thead>
-                            <tr>
-                                <th className='dailyView-taskCol' scope="col">TASK</th>
-                                <th scope="col">CATEGORY</th>
-                                <th scope="col">DUE DATE</th>
-                                <th scope="col">PRIORITY</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {propsIsArray() && props.tasks.map(taskItem => {
-                                return <ListItem key={taskItem.task_id} id={taskItem.task_id} description={taskItem.task_description} category={taskItem.category} due_date={taskItem.due_date} priority={taskItem.task_priority}/>
-                            })}
-                        </tbody>
-                    </table>
-                </section>
-                
-            </div>
-        </>
+            <section className='dailyView-tableContainer'>
+                <table class="table dailyView-tableStyle">
+                    <thead>
+                        <tr>
+                            <th className='dailyView-taskCol' scope="col">TASK</th>
+                            <th scope="col">CATEGORY</th>
+                            <th scope="col">DUE DATE</th>
+                            <th scope="col">PRIORITY</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {propsIsArray() && props.tasks.map(taskItem => {
+                            return <ListItem key={taskItem.task_id} id={taskItem.task_id} description={taskItem.task_description} category={taskItem.category} due_date={taskItem.due_date} priority={taskItem.task_priority}/>
+                        })}
+                    </tbody>
+                </table>
+            </section>
+            
+        </div>
+    </>
     )
 }

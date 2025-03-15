@@ -75,7 +75,7 @@ export default function AddTaskModal(props) {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="dailyView-addTaskBtn" onClick={e => handleCreateTask(e, formData, setInvalidData, token, setFormData, props.setTasks, modalRef)}>Create Task</button>
+                        <button type="submit" class="dailyView-addTaskBtn" onClick={e => handleCreateTask(e, formData, setInvalidData, token, setFormData, modalRef, props.setParentTasks)}>Create Task</button>
                     </div>
                 </div>
             </div>

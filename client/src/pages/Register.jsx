@@ -34,9 +34,6 @@ export default function Register() {
         }
     }
 
-    console.log("current access token is: ", token)
-    console.log("current user id is: ", userID)
-
     return (
         <div className='register-container'>
             <h1 className='login-header'>Welcome!</h1>

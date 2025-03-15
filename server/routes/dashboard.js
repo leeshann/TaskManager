@@ -37,6 +37,20 @@ router.get('/task/:task_id', authorize, async (req, res) => {
     }
 })
 
+router.delete('/task/:task_id', authorize, async (req, res) => {
+    const { task_id } = req.params
+    try {
+        const deleteTask = await pool.query(
+            "DELETE FROM task WHERE task_id = $1",
+            [task_id]
+        )
+        res.status(200).send()
+    } catch (error) {
+        console.log("In /dashboard DELETE: ", error.message)
+        res.status(500).send()
+    }
+})
+
 router.put('/', authorize, async (req, res) => {
     const { description, due_date, category, priority, task_id } = req.body
 

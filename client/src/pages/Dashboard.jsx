@@ -1,8 +1,9 @@
 import axios from 'axios'
 import TokenContext from '../contexts/TokenProvider'
 import '../assets/css/dashboard.css'
-import DailyView from '../components/DailyView'
+import AllTasksView from '../components/AllTasksView'
 import WeeklyView from '../components/WeeklyView'
+import DailyView from '../components/DailyView'
 import { useContext, useEffect, useState } from 'react'
 
 export default function Dashboard() {
@@ -35,7 +36,7 @@ export default function Dashboard() {
         if (token) {
             fetchData()
         }
-    }, [token, tasks])
+    }, [token])
 
     return (
         <div className='dashboard-container'>
@@ -44,8 +45,9 @@ export default function Dashboard() {
 
                 <nav>
                     <ul className='dashboard-views'>
-                        <button id="DailyView" className={selectedView === 'DailyView' ? 'dashboard-sidebar-selected' :'dashboard-sidebar-buttons'} onClick={e => setSelectedView(e.target.id)} href="">Daily View</button>
-                        <button id='WeeklyView' className={selectedView === 'WeeklyView' ? 'dashboard-sidebar-selected':'dashboard-sidebar-buttons'} onClick={e => setSelectedView( e.target.id)} href="">Weekly View</button>
+                        <button id="AllTasksView" className={selectedView === 'AllTasksView' ? 'dashboard-sidebar-selected' :'dashboard-sidebar-buttons'} onClick={e => setSelectedView(e.target.id)}>All Tasks</button>
+                        <button id="DailyView" className={selectedView === 'DailyView' ? 'dashboard-sidebar-selected' :'dashboard-sidebar-buttons'} onClick={e => setSelectedView(e.target.id)}>Daily View</button>
+                        <button id='WeeklyView' className={selectedView === 'WeeklyView' ? 'dashboard-sidebar-selected':'dashboard-sidebar-buttons'} onClick={e => setSelectedView( e.target.id)}>Weekly View</button>
                     </ul>
                 </nav>
 
@@ -64,6 +66,7 @@ export default function Dashboard() {
                 <button>profile</button>
             </section>
 
+            {selectedView === 'AllTasksView' && <AllTasksView tasks={tasks} setTasks={setTasks} />}
             {selectedView === 'DailyView' && <DailyView tasks={tasks}/>}
             {selectedView === 'WeeklyView' && <WeeklyView />}
 
