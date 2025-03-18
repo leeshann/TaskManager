@@ -7,6 +7,7 @@ create table task (
     due_date TIMESTAMP,
     category TEXT,
     task_priority TEXT,
+    completed BOOLEAN,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 

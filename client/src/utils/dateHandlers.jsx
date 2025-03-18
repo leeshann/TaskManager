@@ -52,14 +52,27 @@ export function getLocalizedDateTime(due_date) {
 // returns 3/17/2025, 8:00:00
 }
 
-// takes 3/17/2025
+// takes 3/17/2025 returns 2025-03-17
 export function getInputAcceptedDate(date) {
     const [month, day, year] = date.split("/")
     return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
 }
 
-// takes 8:00:00 PM
+// takes 8:00:00 PM returns 08:00:00
 export function getInputAcceptedTime(time) {
     const [hour, min, sec] = time.substring(0, 7).split(":")
     return `${hour.padStart(2, '0')}:${min}:${sec}`
+}
+
+// takes 2025-03-18 returns 3/17/2025
+export function getConventionalDateFormat(date) {
+    let [year, month, day] = date.split('-')
+    if (month.charAt(0) === '0') {
+        month = month.substring(1, 2)
+    }
+    if (day.charAt(0) === '0') {
+        day = day.substring(1, 2)
+    }
+
+    return `${month}/${day}/${year}`
 }

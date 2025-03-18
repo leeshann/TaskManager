@@ -3,6 +3,10 @@
     border-radius: 10px;
 }
 
+.listItem-description {
+    margin-top: 4px;
+}
+
 .listItem-checkBtn {
     width: 25px;
     height: 25px;
@@ -14,11 +18,24 @@
     margin-right: 10px;
 }
 
+.listItem-checkBtnCompleted {
+    width: 25px;
+    height: 25px;
+    margin-top: 5px;
+    border: solid 2px #6c5ce7;
+    border-radius: 100px;
+    background-color: #6c5ce7;
+
+    margin-right: 10px;
+}
+
 .listItem-content {
+    display: inline;
+    width: 100%;
+    height: 100%;
+
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    width: 100%;
 }
 
 .listItem-editDeleteContainer {
@@ -54,16 +71,10 @@
     color: #FF6B6B;
 }
 
-.listItem-centerdata{
-    display: flex;
-   justify-content: start;
-   margin-top: 5px;
-}
-
-.listItem > td{
+.listItem > td {
     padding-top: 20px;
-    padding-bottom: 20px;
     border-bottom: none;
+    white-space: nowrap;
 }
 
 .listItem > td:first-child {
@@ -71,10 +82,42 @@
     border-bottom-left-radius: 10px;
 
     display: flex;
+    justify-content: space-evenly;
 }
+
 
 .listItem > td:last-child {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+}
+
+.high-priority {
+    background-color: red;
+    width: 65px;
+    border-radius: 100px;
+
+    display: flex;
+    justify-content: center;
+    color: white
+}
+
+.low-priority {
+    background-color: rgb(94, 154, 94);
+    width: 65px;
+    border-radius: 100px;
+
+    display: flex;
+    justify-content: center;
+    color: white
+}
+
+.medium-priority {
+    background-color: rgb(218, 133, 67);
+    width: 65px;
+    border-radius: 100px;
+
+    display: flex;
+    justify-content: center;
+    color: white
 }
 

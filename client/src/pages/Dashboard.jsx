@@ -9,7 +9,8 @@ import { useContext, useEffect, useState } from 'react'
 export default function Dashboard() {
 
     const [name, setName] = useState("")
-    const [tasks, setTasks] = useState()
+    const [tasks, setTasks] = useState([])
+    const [completedTasks, setCompletedTasks] = useState([])
     const { token } = useContext(TokenContext)
     const [selectedView, setSelectedView] = useState('DailyView')
 
@@ -23,6 +24,14 @@ export default function Dashboard() {
                 })
                 setName(response.data.name)
                 setTasks(response.data.tasks)
+
+                const getAllCompletedTasks = await axios.get('http://localhost:3029/dashboard/getCompletedTasks', 
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+                setCompletedTasks(getAllCompletedTasks.data)
             } catch (error) {
                 if (error.response) {
                     console.log("Error fetching data: ", error.response.data)
@@ -46,7 +55,7 @@ export default function Dashboard() {
                 <nav>
                     <ul className='dashboard-views'>
                         <button id="AllTasksView" className={selectedView === 'AllTasksView' ? 'dashboard-sidebar-selected' :'dashboard-sidebar-buttons'} onClick={e => setSelectedView(e.target.id)}>All Tasks</button>
-                        <button id="DailyView" className={selectedView === 'DailyView' ? 'dashboard-sidebar-selected' :'dashboard-sidebar-buttons'} onClick={e => setSelectedView(e.target.id)}>Daily View</button>
+                        <button id="DailyView" className={selectedView === 'DailyView' ? 'dashboard-sidebar-selected' :'dashboard-sidebar-buttons'} onClick={e => setSelectedView(e.target.id)}>Due Today</button>
                         <button id='WeeklyView' className={selectedView === 'WeeklyView' ? 'dashboard-sidebar-selected':'dashboard-sidebar-buttons'} onClick={e => setSelectedView( e.target.id)}>Weekly View</button>
                     </ul>
                 </nav>
@@ -66,8 +75,8 @@ export default function Dashboard() {
                 <button>profile</button>
             </section>
 
-            {selectedView === 'AllTasksView' && <AllTasksView tasks={tasks} setAllTasks={setTasks} />}
-            {selectedView === 'DailyView' && <DailyView tasks={tasks} setAllTasks={setTasks}/>}
+            {selectedView === 'AllTasksView' && <AllTasksView tasks={tasks} setAllTasks={setTasks} allCompletedTasks={completedTasks} setAllCompletedTasks={setCompletedTasks}/>}
+            {selectedView === 'DailyView' && <DailyView tasks={tasks} setAllTasks={setTasks} allCompletedTasks={completedTasks} setAllCompletedTasks={setCompletedTasks}/>}
             {selectedView === 'WeeklyView' && <WeeklyView />}
 
         </div>
