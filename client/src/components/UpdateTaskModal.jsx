@@ -1,18 +1,36 @@
 import { useState, useContext, useEffect, useRef } from "react"
+import TokenContext from '../contexts/TokenProvider'
+import { getLocalizedDateTime, getReformattedDate, getReformattedTime } from '../utils/dateHandler'
 import { handleInputChange } from "../utils/handleInputChange"
 import { handleUpdateTask } from "../utils/handleUpdateTask"
-import TokenContext from '../contexts/TokenProvider'
 
 export default function UpdateTaskModal(props) {
     const { token } = useContext(TokenContext)
-    const [formData, setFormData] = useState({})
+    const [formData, setFormData] = useState({
+        description: "",
+        due_date: "",
+        due_time: "",
+        category: "",
+        priority: "",
+        task_id: ""
+    })
     const modalRef = useRef(null)
 
     useEffect(() => {
+
+        if (Object.values(props.formData).some(value => value === "")) {
+            setFormData(prev => prev)
+            return
+        }
+
+        const localizedDateTime = getLocalizedDateTime(props.formData.due_date)
+        const reformattedDate = getReformattedDate(localizedDateTime.split(", ")[0])
+        const reformattedTime = getReformattedTime(localizedDateTime.split(", ")[1])
+
         setFormData({
             description: props.formData.description,
-            due_date: props.formData.due_date.split("T")[0],
-            due_time: props.formData.due_date.substring(11, 19),
+            due_date: reformattedDate,
+            due_time: reformattedTime,
             category: props.formData.category,
             priority: props.formData.priority,
             task_id: props.id
@@ -24,7 +42,10 @@ export default function UpdateTaskModal(props) {
         modalRef.current = new bootstrap.Modal(modalElement);
         
         return () => {
-                modalRef.current.dispose()
+                if (modalRef.current) {
+                    modalRef.current.dispose()  
+                    modalRef.current = null;
+                }
         }
     }, [props.id])
 

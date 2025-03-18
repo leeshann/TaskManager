@@ -9,6 +9,7 @@ import TokenContext from '../contexts/TokenProvider'
 export default function AllTasksView(props) {
 
     const { token } = useContext(TokenContext)
+    const [tasks, setTasks] = useState([])
 
     function propsIsArray() {
         if (!Array.isArray(props.tasks)) {
@@ -20,12 +21,19 @@ export default function AllTasksView(props) {
         }
     }
 
-    console.log(props.tasks)
+    useEffect(() => {
+        const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        setTasks(props.tasks.map((taskItem) => ({
+            ...taskItem, 
+            due_date: new Date(taskItem.due_date).toLocaleString("en-US", {timeZone: userTimeZone})
+        })))
+    }, [props.tasks])
 
-
+    console.log(tasks)
+    
     return (
         <>
-            <AddTaskModal setParentTasks={props.setTasks} />
+            <AddTaskModal setTasks={props.setTasks}/>
 
             <div className='dailyView-task-area'>
                 <section className='dailyView-header'>
@@ -49,7 +57,7 @@ export default function AllTasksView(props) {
                             </tr>
                         </thead>
                         <tbody>
-                            {propsIsArray() && props.tasks.map(taskItem => {
+                            {propsIsArray() && tasks.map(taskItem => {
                                 return <ListItem 
                                         key={taskItem.task_id} 
                                         id={taskItem.task_id} 

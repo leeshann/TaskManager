@@ -1,3 +1,5 @@
+// DATE HANDLERS
+
 export const today = new Date().toLocaleDateString('en-US', {
     weekday: 'long',
     month: 'long',
@@ -39,4 +41,25 @@ function formatDate(date) {
 export function getMinDate() {
     const date = minYear + "-" + formatMonth(minMonth) + "-" + formatDate(minDay)
     return date
+}
+
+// TIMEZONE HANDLERS
+
+export function getLocalizedDateTime(due_date) {
+    const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+    const localizedDateTime = new Date(due_date).toLocaleString("en-US", { timezone: userTimeZone})
+    return localizedDateTime
+// returns 3/17/2025, 8:00:00
+}
+
+// takes 3/17/2025
+export function getReformattedDate(date) {
+    const [month, day, year] = date.split("/")
+    return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+}
+
+// takes 8:00:00 PM
+export function getReformattedTime(time) {
+    const [hour, min, sec] = time.substring(0, 7).split(":")
+    return `${hour.padStart(2, '0')}:${min}:${sec}`
 }

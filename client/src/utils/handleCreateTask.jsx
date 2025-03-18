@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { getMinDate } from './dateHandler'
 
 const initialFormData = {
     description: "",
@@ -8,8 +9,9 @@ const initialFormData = {
     priority: ""
 }
 
-export async function handleCreateTask(e, formData, setInvalidData, token, setFormData, modalRef, setParentTasks) {
+export async function handleCreateTask(e, formData, setInvalidData, token, setFormData, modalRef, setTasks) {
     e.preventDefault()
+
     let isValidInfo = true
 
     for (const [key, value] of Object.entries(formData)) {
@@ -51,7 +53,8 @@ export async function handleCreateTask(e, formData, setInvalidData, token, setFo
         })
 
         setFormData(initialFormData)
-        setParentTasks(getAllTasks.data.tasks)
+        setTasks(getAllTasks.data.tasks)
+        
         document.getElementsByName("description").value = ""
 
     } catch (error) {

@@ -4,8 +4,8 @@ require('dotenv').config()
 const authorize = async (req, res, next) => {
     try {
         const accessToken = req.header("Authorization")?.split(" ")[1]
-        console.log("Request path:", req.originalUrl, "Method:", req.method)
-        console.log("Has token:", !!accessToken)
+        // console.log("Request path:", req.originalUrl, "Method:", req.method)
+        // console.log("Has token:", !!accessToken)
         if (!accessToken) {
             res.status(401).send("You are not authorized")
             return 

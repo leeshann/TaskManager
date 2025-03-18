@@ -1,15 +1,15 @@
 import { today, getMinDate } from '../utils/dateHandler'
 import ListItem from './ListItem'
 import AddTaskModal from './addTaskModal'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, use } from 'react'
 
 
 export default function DailyView(props) {
 
-    const [tasks, setTasks] = useState()
+    const [todaysTasks, setTodaysTasks] = useState("")
 
-    function propsIsArray() {
-        if (!Array.isArray(props.tasks)) {
+    function propsIsArray(arr) {
+        if (!Array.isArray(arr)) {
             console.error("Expected an array of tasks, but got:", props.tasks);
             return null; 
         } else {
@@ -17,9 +17,25 @@ export default function DailyView(props) {
         }
     }
 
+    useEffect(() => {
+        if (propsIsArray(props.tasks)) {
+            setTodaysTasks(props.tasks.filter((taskItem) => {
+            return taskItem.due_date.includes(getMinDate())
+        }))} else {
+            setTodaysTasks("")
+        }
+    },[props.tasks])
+
+    
+
+    console.log("Unfiltered tasks: ")
+    console.log(props.tasks)
+    console.log("Todays tasks are: ")
+    console.log(todaysTasks)
+
     return (
         <>
-        <AddTaskModal setTasks={setTasks}/>
+        <AddTaskModal setTasks={setTodaysTasks} />
 
         <div className='dailyView-task-area'>
             <section className='dailyView-header'>
@@ -43,7 +59,7 @@ export default function DailyView(props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {propsIsArray() && props.tasks.map(taskItem => {
+                        {propsIsArray(todaysTasks) && todaysTasks.map(taskItem => {
                             return <ListItem key={taskItem.task_id} id={taskItem.task_id} description={taskItem.task_description} category={taskItem.category} due_date={taskItem.due_date} priority={taskItem.task_priority}/>
                         })}
                     </tbody>
