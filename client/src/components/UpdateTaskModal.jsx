@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect, useRef } from "react"
 import TokenContext from '../contexts/TokenProvider'
-import { getLocalizedDateTime, getReformattedDate, getReformattedTime } from '../utils/dateHandler'
+import { getLocalizedDateTime, getInputAcceptedDate, getInputAcceptedTime } from '../utils/dateHandlers'
 import { handleInputChange } from "../utils/handleInputChange"
 import { handleUpdateTask } from "../utils/handleUpdateTask"
 
@@ -24,8 +24,8 @@ export default function UpdateTaskModal(props) {
         }
 
         const localizedDateTime = getLocalizedDateTime(props.formData.due_date)
-        const reformattedDate = getReformattedDate(localizedDateTime.split(", ")[0])
-        const reformattedTime = getReformattedTime(localizedDateTime.split(", ")[1])
+        const reformattedDate = getInputAcceptedDate(localizedDateTime.split(", ")[0])
+        const reformattedTime = getInputAcceptedTime(localizedDateTime.split(", ")[1])
 
         setFormData({
             description: props.formData.description,
@@ -104,7 +104,7 @@ export default function UpdateTaskModal(props) {
                         formData, 
                         token, 
                         modalRef, 
-                        props.setTasks
+                        props.setAllTasks
                     )}>Save changes</button>
                 </div>
                 </div>

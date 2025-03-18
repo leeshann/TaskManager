@@ -1,6 +1,6 @@
 import TokenContext from '../contexts/TokenProvider'
 import { useState, useContext, useEffect, useRef } from 'react'
-import { getMinDate } from '../utils/dateHandler'
+import { getMinDate } from '../utils/dateHandlers'
 import { handleCreateTask } from '../utils/handleCreateTask'
 import { handleInputChange } from '../utils/handleInputChange'
 
@@ -75,7 +75,7 @@ export default function AddTaskModal(props) {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="dailyView-addTaskBtn" onClick={e => handleCreateTask(e, formData, setInvalidData, token, setFormData, modalRef, props.setTasks)}>Create Task</button>
+                        <button type="submit" class="dailyView-addTaskBtn" onClick={e => handleCreateTask(e, formData, setInvalidData, token, setFormData, modalRef, props.setAllTasks)}>Create Task</button>
                     </div>
                 </div>
             </div>

@@ -66,8 +66,8 @@ export default function Dashboard() {
                 <button>profile</button>
             </section>
 
-            {selectedView === 'AllTasksView' && <AllTasksView tasks={tasks} setTasks={setTasks} />}
-            {selectedView === 'DailyView' && <DailyView tasks={tasks}/>}
+            {selectedView === 'AllTasksView' && <AllTasksView tasks={tasks} setAllTasks={setTasks} />}
+            {selectedView === 'DailyView' && <DailyView tasks={tasks} setAllTasks={setTasks}/>}
             {selectedView === 'WeeklyView' && <WeeklyView />}
 
         </div>

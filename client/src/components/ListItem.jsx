@@ -31,7 +31,7 @@ export default function ListItem(props) {
                     Authorization: `Bearer ${token}`
                 }
             })
-            props.setTasks(getAllTasks.data.tasks)
+            props.setAllTasks(getAllTasks.data.tasks)
         } catch (error) {
             if (error.response) {
                 console.log(error.response.data)
@@ -43,7 +43,7 @@ export default function ListItem(props) {
 
     return (
         <>
-            <UpdateTaskModal id={props.id} formData={formData} setTasks={props.setTasks}/>
+            <UpdateTaskModal id={props.id} formData={formData} setAllTasks={props.setAllTasks}/>
              <tr id={props.id} className='listItem'>
                     <td>
                         <button className='listItem-checkBtn'></button>

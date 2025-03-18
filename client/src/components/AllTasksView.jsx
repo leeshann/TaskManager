@@ -1,7 +1,8 @@
 import '../assets/css/dailyView.css'
 import ListItem from './ListItem'
 import AddTaskModal from './addTaskModal'
-import { today } from '../utils/dateHandler'
+import { today } from '../utils/dateHandlers'
+import { propsIsArray } from '../utils/validators'
 import { useState, useEffect, useContext } from 'react'
 import TokenContext from '../contexts/TokenProvider'
 
@@ -11,16 +12,6 @@ export default function AllTasksView(props) {
     const { token } = useContext(TokenContext)
     const [tasks, setTasks] = useState([])
 
-    function propsIsArray() {
-        if (!Array.isArray(props.tasks)) {
-            console.error("Expected an array of tasks, but got:", props.tasks);
-            return null; 
-        } else {
-            console.log("Tasks is array")
-            return true
-        }
-    }
-
     useEffect(() => {
         const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
         setTasks(props.tasks.map((taskItem) => ({
@@ -28,12 +19,10 @@ export default function AllTasksView(props) {
             due_date: new Date(taskItem.due_date).toLocaleString("en-US", {timeZone: userTimeZone})
         })))
     }, [props.tasks])
-
-    console.log(tasks)
     
     return (
         <>
-            <AddTaskModal setTasks={props.setTasks}/>
+            <AddTaskModal setAllTasks={props.setAllTasks}/>
 
             <div className='dailyView-task-area'>
                 <section className='dailyView-header'>
@@ -57,7 +46,7 @@ export default function AllTasksView(props) {
                             </tr>
                         </thead>
                         <tbody>
-                            {propsIsArray() && tasks.map(taskItem => {
+                            {propsIsArray(tasks) && tasks.map(taskItem => {
                                 return <ListItem 
                                         key={taskItem.task_id} 
                                         id={taskItem.task_id} 
@@ -65,7 +54,7 @@ export default function AllTasksView(props) {
                                         category={taskItem.category} 
                                         due_date={taskItem.due_date} 
                                         priority={taskItem.task_priority} 
-                                        setTasks={props.setTasks}/>
+                                        setAllTasks={props.setAllTasks}/>
                             })}
                         </tbody>
                     </table>

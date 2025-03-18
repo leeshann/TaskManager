@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getMinDate } from './dateHandler'
+import { getMinDate } from './dateHandlers'
 
 const initialFormData = {
     description: "",
@@ -9,7 +9,7 @@ const initialFormData = {
     priority: ""
 }
 
-export async function handleCreateTask(e, formData, setInvalidData, token, setFormData, modalRef, setTasks) {
+export async function handleCreateTask(e, formData, setInvalidData, token, setFormData, modalRef, setAllTasks) {
     e.preventDefault()
 
     let isValidInfo = true
@@ -43,7 +43,6 @@ export async function handleCreateTask(e, formData, setInvalidData, token, setFo
                 Authorization: `Bearer ${token}`
             }
         })
-        console.log("response is: " , response)
         modalRef.current.hide()
 
         const getAllTasks = await axios.get("http://localhost:3029/dashboard/", {
@@ -53,7 +52,7 @@ export async function handleCreateTask(e, formData, setInvalidData, token, setFo
         })
 
         setFormData(initialFormData)
-        setTasks(getAllTasks.data.tasks)
+        setAllTasks(getAllTasks.data.tasks)
         
         document.getElementsByName("description").value = ""
 

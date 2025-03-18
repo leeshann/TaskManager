@@ -53,13 +53,13 @@ export function getLocalizedDateTime(due_date) {
 }
 
 // takes 3/17/2025
-export function getReformattedDate(date) {
+export function getInputAcceptedDate(date) {
     const [month, day, year] = date.split("/")
     return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
 }
 
 // takes 8:00:00 PM
-export function getReformattedTime(time) {
+export function getInputAcceptedTime(time) {
     const [hour, min, sec] = time.substring(0, 7).split(":")
     return `${hour.padStart(2, '0')}:${min}:${sec}`
 }

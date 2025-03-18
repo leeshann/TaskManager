@@ -1,41 +1,32 @@
-import { today, getMinDate } from '../utils/dateHandler'
+import { today, getMinDate, getLocalizedDateTime } from '../utils/dateHandlers'
+import { propsIsArray } from '../utils/validators'
 import ListItem from './ListItem'
 import AddTaskModal from './addTaskModal'
-import { useState, useEffect, use } from 'react'
+import { useState, useEffect } from 'react'
 
 
 export default function DailyView(props) {
 
-    const [todaysTasks, setTodaysTasks] = useState("")
-
-    function propsIsArray(arr) {
-        if (!Array.isArray(arr)) {
-            console.error("Expected an array of tasks, but got:", props.tasks);
-            return null; 
-        } else {
-            return true
-        }
-    }
+    const [todaysTasks, setTodaysTasks] = useState([])
 
     useEffect(() => {
         if (propsIsArray(props.tasks)) {
-            setTodaysTasks(props.tasks.filter((taskItem) => {
-            return taskItem.due_date.includes(getMinDate())
-        }))} else {
-            setTodaysTasks("")
+            const tasks_with_reformatted_date = props.tasks.map((taskItem) => ({
+                ...taskItem,
+                due_date: getLocalizedDateTime(taskItem.due_date)
+            }))
+            
+            setTodaysTasks(tasks_with_reformatted_date)
+
+        } else if (!props.tasks) {
+            setTodaysTasks([])
         }
-    },[props.tasks])
+    }, [props.tasks])
 
-    
-
-    console.log("Unfiltered tasks: ")
-    console.log(props.tasks)
-    console.log("Todays tasks are: ")
-    console.log(todaysTasks)
 
     return (
         <>
-        <AddTaskModal setTasks={setTodaysTasks} />
+        <AddTaskModal setAllTasks={props.setAllTasks} />
 
         <div className='dailyView-task-area'>
             <section className='dailyView-header'>
@@ -60,7 +51,14 @@ export default function DailyView(props) {
                     </thead>
                     <tbody>
                         {propsIsArray(todaysTasks) && todaysTasks.map(taskItem => {
-                            return <ListItem key={taskItem.task_id} id={taskItem.task_id} description={taskItem.task_description} category={taskItem.category} due_date={taskItem.due_date} priority={taskItem.task_priority}/>
+                            return <ListItem 
+                                   key={taskItem.task_id} 
+                                   id={taskItem.task_id} 
+                                   description={taskItem.task_description} 
+                                   category={taskItem.category} 
+                                   due_date={taskItem.due_date} 
+                                   priority={taskItem.task_priority}
+                                   setAllTasks={props.setAllTasks}/>
                         })}
                     </tbody>
                 </table>
