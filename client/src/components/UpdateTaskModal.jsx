@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect, useRef } from "react"
 import TokenContext from '../contexts/TokenProvider'
-import { getLocalizedDateTime, getInputAcceptedDate, getInputAcceptedTime } from '../utils/dateHandlers'
+import { getLocalizedDateTime, getInputAcceptedDate, getInputAcceptedTime, getMinDate } from '../utils/dateHandlers'
 import { handleInputChange } from "../utils/handleInputChange"
 import { handleUpdateTask } from "../utils/handleUpdateTask"
 
@@ -68,7 +68,7 @@ export default function UpdateTaskModal(props) {
 
                                 <section className='dailyView-formSections'>
                                     <label htmlFor="due_date" className='dailyView-label' >Due Date</label>
-                                    <input name="due_date" type="date" value={formData.due_date} onChange={e => handleInputChange(e, setFormData)}/>
+                                    <input name="due_date" type="date" min={getMinDate()} value={formData.due_date} onChange={e => handleInputChange(e, setFormData)}/>
                                 </section>
 
                                 <section className='dailyView-formSections'>

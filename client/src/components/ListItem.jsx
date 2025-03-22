@@ -99,9 +99,9 @@ export default function ListItem(props) {
                             </section>
                         </section>
                     </td>
-                    <td><section className='listItem-centerdata'>{props.category}</section></td>
-                    <td><section className='listItem-centerdata'>{props.due_date}</section></td>
-                    <td><section className='listItem-centerdata'><p className={props.priority === 'Medium' ? 'medium-priority' : props.priority === 'High' ? 'high-priority' : 'low-priority'}>{props.priority}</p></section></td>
+                    <td><section><p className={props.category === 'Home' ? 'category-home' : props.category === 'Work' ? 'category-work' : 'category-personal'}>{props.category}</p></section></td>
+                    <td><section>{props.due_date}</section></td>
+                    <td><section><p className={props.priority === 'Medium' ? 'medium-priority' : props.priority === 'High' ? 'high-priority' : 'low-priority'}>{props.priority}</p></section></td>
             </tr>
         </>
     )

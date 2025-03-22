@@ -92,32 +92,68 @@
 }
 
 .high-priority {
-    background-color: red;
+    background-color: #F44336 ;
     width: 65px;
     border-radius: 100px;
 
     display: flex;
     justify-content: center;
-    color: white
+    color: white;
+
+    margin-top: 5px;
 }
 
 .low-priority {
-    background-color: rgb(94, 154, 94);
+    background-color: #4CAF50;
     width: 65px;
     border-radius: 100px;
 
     display: flex;
     justify-content: center;
-    color: white
+    color: white;
+
+    margin-top: 5px;
 }
 
 .medium-priority {
-    background-color: rgb(218, 133, 67);
+    background-color: #FFC107;
     width: 65px;
     border-radius: 100px;
 
     display: flex;
     justify-content: center;
-    color: white
+    color: white;
+
+    margin-top: 5px;
+}
+
+.category-work{
+    background-color: #9300ff;
+    margin-top: 5px;
+    border-radius: 100px;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+}
+
+.category-home{
+    background-color: #9ECAE1;
+    margin-top: 5px;
+    border-radius: 100px;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+}
+
+.category-personal{
+    background-color: #8AC926;
+    margin-top: 5px;
+    border-radius: 100px;
+    color: white;
+
+    display: flex;
+    justify-content: center;
 }
 

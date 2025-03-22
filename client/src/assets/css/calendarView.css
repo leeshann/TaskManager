@@ -1,0 +1,12 @@
+.calendar {
+    grid-column-start: 2;
+    grid-column-end: 8;
+
+    grid-row-start: 2;
+    grid-row-end: 8;
+
+    overflow: scroll;
+    padding: 20px;
+
+    background-color: #F5F5F9;
+}

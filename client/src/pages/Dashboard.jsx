@@ -4,6 +4,7 @@ import '../assets/css/dashboard.css'
 import AllTasksView from '../components/AllTasksView'
 import WeeklyView from '../components/WeeklyView'
 import DailyView from '../components/DailyView'
+import CalendarView from '../components/CalendarView'
 import { useContext, useEffect, useState } from 'react'
 
 export default function Dashboard() {
@@ -77,7 +78,7 @@ export default function Dashboard() {
 
             {selectedView === 'AllTasksView' && <AllTasksView tasks={tasks} setAllTasks={setTasks} allCompletedTasks={completedTasks} setAllCompletedTasks={setCompletedTasks}/>}
             {selectedView === 'DailyView' && <DailyView tasks={tasks} setAllTasks={setTasks} allCompletedTasks={completedTasks} setAllCompletedTasks={setCompletedTasks}/>}
-            {selectedView === 'WeeklyView' && <WeeklyView />}
+            {selectedView === 'WeeklyView' && <CalendarView tasks={tasks} />}
 
         </div>
     )
