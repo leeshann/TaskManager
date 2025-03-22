@@ -6,6 +6,7 @@ import WeeklyView from '../components/WeeklyView'
 import DailyView from '../components/DailyView'
 import CalendarView from '../components/CalendarView'
 import { useContext, useEffect, useState } from 'react'
+import CategoryView from '../components/CategoryView'
 
 export default function Dashboard() {
 
@@ -13,7 +14,7 @@ export default function Dashboard() {
     const [tasks, setTasks] = useState([])
     const [completedTasks, setCompletedTasks] = useState([])
     const { token } = useContext(TokenContext)
-    const [selectedView, setSelectedView] = useState('DailyView')
+    const [selectedView, setSelectedView] = useState('AllTasksView')
 
     useEffect(() => {
         async function fetchData() {
@@ -57,16 +58,16 @@ export default function Dashboard() {
                     <ul className='dashboard-views'>
                         <button id="AllTasksView" className={selectedView === 'AllTasksView' ? 'dashboard-sidebar-selected' :'dashboard-sidebar-buttons'} onClick={e => setSelectedView(e.target.id)}>All Tasks</button>
                         <button id="DailyView" className={selectedView === 'DailyView' ? 'dashboard-sidebar-selected' :'dashboard-sidebar-buttons'} onClick={e => setSelectedView(e.target.id)}>Due Today</button>
-                        <button id='WeeklyView' className={selectedView === 'WeeklyView' ? 'dashboard-sidebar-selected':'dashboard-sidebar-buttons'} onClick={e => setSelectedView( e.target.id)}>Weekly View</button>
+                        <button id='CalendarView' className={selectedView === 'CalendarView' ? 'dashboard-sidebar-selected':'dashboard-sidebar-buttons'} onClick={e => setSelectedView( e.target.id)}>Calendar View</button>
                     </ul>
                 </nav>
 
                 <p className='dashboard-categories-title'>CATEGORIES</p>
                 <nav>
                     <ul className='dashboard-categories'>
-                        <a className='dashboard-sidebar-buttons' href="">Work</a>
-                        <a className='dashboard-sidebar-buttons' href="">Personal</a>
-                        <a className='dashboard-sidebar-buttons' href="">Home</a>
+                        <a id="WorkView" className={selectedView === 'WorkView' ? 'dashboard-sidebar-selected' :'dashboard-sidebar-buttons'} onClick={e => setSelectedView(e.target.id)}>Work</a>
+                        <a id="PersonalView" className={selectedView === 'PersonalView' ? 'dashboard-sidebar-selected' :'dashboard-sidebar-buttons'} onClick={e => setSelectedView(e.target.id)}>Personal</a>
+                        <a id="HomeView" className={selectedView === 'HomeView' ? 'dashboard-sidebar-selected' :'dashboard-sidebar-buttons'} onClick={e => setSelectedView(e.target.id)}>Home</a>
                     </ul>
                 </nav>
             </section>
@@ -78,7 +79,11 @@ export default function Dashboard() {
 
             {selectedView === 'AllTasksView' && <AllTasksView tasks={tasks} setAllTasks={setTasks} allCompletedTasks={completedTasks} setAllCompletedTasks={setCompletedTasks}/>}
             {selectedView === 'DailyView' && <DailyView tasks={tasks} setAllTasks={setTasks} allCompletedTasks={completedTasks} setAllCompletedTasks={setCompletedTasks}/>}
-            {selectedView === 'WeeklyView' && <CalendarView tasks={tasks} />}
+            {selectedView === 'CalendarView' && <CalendarView tasks={tasks} />}
+
+            {selectedView === 'WorkView' && <CategoryView tasks={tasks} category="Work" setAllTasks={setTasks} allCompletedTasks={completedTasks} setAllCompletedTasks={setCompletedTasks}/>}
+            {selectedView === 'PersonalView' && <CategoryView tasks={tasks} category="Personal" setAllTasks={setTasks} allCompletedTasks={completedTasks} setAllCompletedTasks={setCompletedTasks} />}
+            {selectedView === 'HomeView' && <CategoryView tasks={tasks} category="Home" setAllTasks={setTasks} allCompletedTasks={completedTasks} setAllCompletedTasks={setCompletedTasks}/>}
 
         </div>
     )
