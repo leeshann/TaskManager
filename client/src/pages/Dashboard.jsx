@@ -7,6 +7,7 @@ import DailyView from '../components/DailyView'
 import CalendarView from '../components/CalendarView'
 import { useContext, useEffect, useState } from 'react'
 import CategoryView from '../components/CategoryView'
+import SearchedTasksView from '../components/SearchedTasksView'
 
 export default function Dashboard() {
 
@@ -15,6 +16,7 @@ export default function Dashboard() {
     const [completedTasks, setCompletedTasks] = useState([])
     const { token } = useContext(TokenContext)
     const [selectedView, setSelectedView] = useState('AllTasksView')
+    const [dashboardInput, setDashboardInput] = useState("")
 
     useEffect(() => {
         async function fetchData() {
@@ -73,18 +75,20 @@ export default function Dashboard() {
             </section>
 
             <section className='dashboard-searchbar'>
-                <input type="text" className='dashboard-input' placeholder='Search tasks...'/>
+                <input type="text" className='dashboard-input' placeholder='Search tasks...' value={dashboardInput} onChange={e => setDashboardInput(e.target.value)} />
                 <button>profile</button>
             </section>
 
-            {selectedView === 'AllTasksView' && <AllTasksView tasks={tasks} setAllTasks={setTasks} allCompletedTasks={completedTasks} setAllCompletedTasks={setCompletedTasks}/>}
-            {selectedView === 'DailyView' && <DailyView tasks={tasks} setAllTasks={setTasks} allCompletedTasks={completedTasks} setAllCompletedTasks={setCompletedTasks}/>}
-            {selectedView === 'CalendarView' && <CalendarView tasks={tasks} />}
 
-            {selectedView === 'WorkView' && <CategoryView tasks={tasks} category="Work" setAllTasks={setTasks} allCompletedTasks={completedTasks} setAllCompletedTasks={setCompletedTasks}/>}
-            {selectedView === 'PersonalView' && <CategoryView tasks={tasks} category="Personal" setAllTasks={setTasks} allCompletedTasks={completedTasks} setAllCompletedTasks={setCompletedTasks} />}
-            {selectedView === 'HomeView' && <CategoryView tasks={tasks} category="Home" setAllTasks={setTasks} allCompletedTasks={completedTasks} setAllCompletedTasks={setCompletedTasks}/>}
+            {dashboardInput.trim().length === 0 && selectedView === 'AllTasksView' && <AllTasksView tasks={tasks} setAllTasks={setTasks} allCompletedTasks={completedTasks} setAllCompletedTasks={setCompletedTasks}/>}
+            {dashboardInput.trim().length === 0 && selectedView === 'DailyView' && <DailyView tasks={tasks} setAllTasks={setTasks} allCompletedTasks={completedTasks} setAllCompletedTasks={setCompletedTasks}/>}
+            {dashboardInput.trim().length === 0 && selectedView === 'CalendarView' && <CalendarView tasks={tasks} />}
 
+            {dashboardInput.trim().length === 0 && selectedView === 'WorkView' && <CategoryView tasks={tasks} category="Work" setAllTasks={setTasks} allCompletedTasks={completedTasks} setAllCompletedTasks={setCompletedTasks}/>}
+            {dashboardInput.trim().length === 0 && selectedView === 'PersonalView' && <CategoryView tasks={tasks} category="Personal" setAllTasks={setTasks} allCompletedTasks={completedTasks} setAllCompletedTasks={setCompletedTasks} />}
+            {dashboardInput.trim().length === 0 && selectedView === 'HomeView' && <CategoryView tasks={tasks} category="Home" setAllTasks={setTasks} allCompletedTasks={completedTasks} setAllCompletedTasks={setCompletedTasks}/>}
+        
+            {dashboardInput.trim().length > 0 && <SearchedTasksView tasks={tasks} inputValue={dashboardInput} setAllTasks={setTasks} setAllCompletedTasks={setCompletedTasks}/>}
         </div>
     )
 }
