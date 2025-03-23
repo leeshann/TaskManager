@@ -22,10 +22,11 @@ export function TokenProvider({children}) {
     }
 
     function logout(userID) {
-        localStorage.setItem('userID', userID)
+        localStorage.removeItem('userID', userID)
         localStorage.removeItem(`accessToken${userID}`)
         setToken(null)
-        setUserID(userID)
+        setUserID(null)
+        window.location = "/"
     }
 
     const values = {

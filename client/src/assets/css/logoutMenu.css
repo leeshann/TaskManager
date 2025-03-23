@@ -1,0 +1,14 @@
+.logout-menu-container {
+    position: absolute;
+    right: 25px;
+    top: 75px;
+    width: 100px;
+}
+
+.logout-button {
+    width: 100px;
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid grey;
+}

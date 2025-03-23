@@ -23,7 +23,7 @@ export default function SearchedTasksView(props) {
         } else if (!props.tasks) {
             setSearchTasks([])
         }
-    }, [props.inputValue])
+    }, [props.inputValue, props.tasks])
 
     return (
         <>
