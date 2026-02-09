@@ -1,8 +1,10 @@
 # Stack
-Express + Node.js backend<br>
-React + HTML + CSS front end<br>
-PostgreSQL database management<br>
-JWT authentication<br>
+| Layer | Technology |
+|-------|------------|
+| Backend | Express + Node.js |
+| Frontend | React + HTML + CSS |
+| Database | PostgreSQL |
+| Auth | JWT |
 
 # Secure log in
 Password hash stored in database, and authentication done using JWT
