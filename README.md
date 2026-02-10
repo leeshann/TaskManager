@@ -2,7 +2,7 @@
 | Layer | Technology |
 |-------|------------|
 | Backend | Express + Node.js |
-| Frontend | React + HTML + CSS |
+| Frontend | React/Vite + HTML + CSS |
 | Database | PostgreSQL |
 | Auth | JWT |
 
